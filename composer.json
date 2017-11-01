@@ -1,0 +1,29 @@
+{
+    "name": "biaoqianwo/face",
+    "description": "The Best Image Ocr SDK For BAT.",
+    "keywords": ["face", "人脸比对", "百度FACE", "腾讯FACE", "阿里云FACE"],
+    "homepage": "http://github.com/biaoqianwo/face",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "biaoqianwo",
+            "email": "704872038@qq.com"
+        }
+    ],
+    "require": {
+        "doctrine/cache": "^1.6",
+        "pimple/pimple": "~3.0",
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Biaoqianwo\\Face\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    }
+}
