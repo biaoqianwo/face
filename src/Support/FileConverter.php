@@ -33,6 +33,7 @@ class FileConverter
     {
         switch (true) {
             case self::isFile($image):
+            case self::isUrl($image):
                 return file_get_contents($image);
             case self::isResource($image):
                 return stream_get_contents($image);
@@ -44,7 +45,6 @@ class FileConverter
                 if (stripos($image, DIRECTORY_SEPARATOR) !== false) {
                     throw new RuntimeException("file {$image} has not exist.");
                 }
-
                 return $image;
             default:
                 throw new RuntimeException('not support image type.');

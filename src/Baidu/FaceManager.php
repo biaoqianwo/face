@@ -1,8 +1,6 @@
 <?php
 namespace Biaoqianwo\Face\Baidu;
 
-use RuntimeException;
-use Doctrine\Common\Cache\Cache;
 use Biaoqianwo\Face\Support\FileConverter;
 use Biaoqianwo\Face\Support\Http;
 
@@ -15,12 +13,6 @@ class FaceManager
 {
     protected $accessToken;
 
-    /**
-     * API Whether to support url
-     * @var boolean
-     */
-    protected $supportUrl = true;
-
     const DETECT = 'https://aip.baidubce.com/rest/2.0/vis-faceattribute/v1/faceattribute';
     const MATCH = 'https://aip.baidubce.com/rest/2.0/face/v2/match';
 
@@ -30,17 +22,20 @@ class FaceManager
     }
 
     /**
-     * @param $image
+     * @param $images
      * @param array $options
-     * ('max_face_num' => 1,
-     * 'face_fields' => 'expression')
      * @return string
      */
-    public function detect($image, array $options = [])
+    public function detect($images, array $options = [])
     {
         return $this->request(self::DETECT, $this->buildRequestParam($images, $options));
     }
 
+    /**
+     * @param $images
+     * @param array $options
+     * @return string
+     */
     public function match($images, array $options = [])
     {
         return $this->request(self::MATCH, $this->buildRequestParam($images, $options));
@@ -74,27 +69,21 @@ class FaceManager
     }
 
     /**
-     *  Build Request Param
-     * @param string|\SplFileInfo $images
+     * @param $images
      * @param array $options
      * @return array
      */
     protected function buildRequestParam($images, $options = [])
     {
-        if (is_array($images) && !empty($images[0])) {
-            $images = $images[0];
-        }
-
-        if (!$this->supportUrl && FileConverter::isUrl($images)) {
-            throw new RuntimeException('current method not support online picture.');
-        }
-
-        if ($this->supportUrl && FileConverter::isUrl($images)) {
-            $options['url'] = $images;
+        if (is_array($images) && count($images) == 2) {
+            $img = FileConverter::toBase64Encode($images[0]);
+            $img1 = FileConverter::toBase64Encode($images[1]);
+            //images:base64编码后的2张图片数据，半角逗号分隔，单次请求总共最大20M
+            $options['images'] = implode(',', array($img, $img1));
         } else {
-            $options['image'] = FileConverter::toBase64Encode($images);
+            $image = $images;
+            $options['image'] = FileConverter::toBase64Encode($image);;
         }
-
         return $options;
     }
 }
