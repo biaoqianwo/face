@@ -15,9 +15,9 @@ class TencentProvider implements ServiceProviderInterface
     {
         $pimple['tencent.auth'] = function ($app) {
             return new Authorization(
-                $app['config']->get('app_id'),
-                $app['config']->get('secret_id'),
-                $app['config']->get('secret_key'),
+                $app['config']->get('appId'),
+                $app['config']->get('secretId'),
+                $app['config']->get('secretKey'),
                 $app['config']->get('bucket')
             );
         };

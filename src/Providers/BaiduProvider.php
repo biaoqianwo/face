@@ -15,8 +15,8 @@ class BaiduProvider implements ServiceProviderInterface
     {
         $pimple['baidu.auth'] = function ($app) {
             return new AccessToken(
-                $app['config']->get('app_key'),
-                $app['config']->get('secret_key'),
+                $app['config']->get('appKey'),
+                $app['config']->get('secretKey'),
                 $app['cache']
             );
         };

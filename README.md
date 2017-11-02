@@ -39,41 +39,27 @@ composer require biaoqianwo/face
 use Biaoqianwo\Face\Application;
 
 $app = new Application([
-    'app_key' => 'app_key',
-    'secret_key' => 'secret_key'
+    'appKey' => 'appKey',
+    'secretKey' => 'secretKey'
 ]);
 
 //人脸比对
-$result = $app->baidu->match($filePath);
+$result = $app->baidu->match($files);
 ```
 
-**返回结果**
-
+**返回结果**  
+请求两张图片
 ```json
 {
-    "log_id": 530427582,
-    "image_status": "normal",
-    "words_result_num": 6,
-    "words_result": {
-        "住址": {
-            "words": "上海市闵行区华漕镇红卫村宗家巷1号"
-        },
-        "出生": {
-            "words": "19870723"
-        },
-        "姓名": {
-            "words": "鹿晗"
-        },
-        "公民身份号码": {
-            "words": "123456789123456132X"
-        },
-        "性别": {
-            "words": "男"
-        },
-        "民族": {
-            "words": "汉"
+    "log_id": 73473737,
+    "result_num":1,
+    "result": [
+        {
+            "index_i": 0,
+            "index_j": 1,
+            "score": 44.3
         }
-    }
+    ]
 }
 ```
 
@@ -132,9 +118,7 @@ $app = new Application([
 #### 人脸比对
 
 ```php
-$app->aliyun->match($file, [
-    'side' => 'face',
-]);
+$app->aliyun->match($files);
 ```
 
 <a name="tencent-face"></a>
@@ -146,9 +130,9 @@ $app->aliyun->match($file, [
 use Biaoqianwo\Face\Application;
 
 $app = new Application([
-    'app_id' => '1254032478',
-    'secret_id' => 'AKIDzODdB1nOELz0T8CEjTEkgKJOob3t2Tso',
-    'secret_key' => '6aHHkz236LOYu0nRuBwn5PwT0x3km7EL',
+    'appId' => '1254032478',
+    'secretId' => 'AKIDzODdB1nOELz0T8CEjTEkgKJOob3t2Tso',
+    'secretKey' => '6aHHkz236LOYu0nRuBwn5PwT0x3km7EL',
     'bucket' => 'test1'
 ]);
 ```
@@ -159,9 +143,7 @@ $app = new Application([
 #### 人脸比对
 
 ```php
-$app->tencent->match($file, [
-    'card_type' => 0,
-]);
+$app->tencent->match($files);
 ```
 ## LICENSE
 MIT
