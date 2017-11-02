@@ -1,14 +1,4 @@
 <?php
-
-/*
- * This file is part of the godruoyi/ocr.
- *
- * (c) godruoyi <godruoyi@gmail.com>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-
 namespace Biaoqianwo\Face\Tencent;
 
 use RuntimeException;
@@ -26,7 +16,7 @@ use Biaoqianwo\Face\Support\FileConverter;
  * @method array drivingLicence($images, $options = []) 行驶证驾驶证识别
  * @method array general($images, $options = []) 通用文字识别
  */
-class OCRManager
+class FaceManager
 {
     /**
      * Authorization instance

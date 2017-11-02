@@ -1,20 +1,10 @@
 <?php
-
-/*
- * This file is part of the godruoyi/ocr.
- *
- * (c) godruoyi <godruoyi@gmail.com>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-
 namespace Biaoqianwo\Face\Providers;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Biaoqianwo\Face\Baidu\AccessToken;
-use Biaoqianwo\Face\Baidu\OCRManager;
+use Biaoqianwo\Face\Baidu\FaceManager;
 
 class BaiduProvider implements ServiceProviderInterface
 {
@@ -32,7 +22,7 @@ class BaiduProvider implements ServiceProviderInterface
         };
 
         $pimple['baidu'] = function ($app) {
-            return new OCRManager($app['baidu.auth']);
+            return new FaceManager($app['baidu.auth']);
         };
     }
 }

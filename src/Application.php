@@ -1,14 +1,4 @@
 <?php
-
-/*
- * This file is part of the godruoyi/ocr.
- *
- * (c) godruoyi <godruoyi@gmail.com>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-
 namespace Biaoqianwo\Face;
 
 use Exception;
@@ -16,14 +6,14 @@ use Pimple\Container;
 use Biaoqianwo\Face\Support\Config;
 
 /**
- * @author    biaoqianwo 704872038@qq.com>
+ * @author  <biaoqianwo 704872038@qq.com>
  * @copyright 2017
  *
- * @see  http://ai.baidu.com/docs#/OCR-API/top
+ * @see  http://ai.baidu.com/docs#/Face-API/top
  * @see  https://github.com/biaoqianwo/face
  *
- * @property string $baidu 百度OCR识别
- *     method idcard($files, $options = []) 身份证识别
+ * @property string $baidu 百度AI人脸识别
+ *     method match($images, $options = []) 人脸比对
  */
 class Application extends Container
 {
@@ -47,7 +37,6 @@ class Application extends Container
     public function __construct($configs = null)
     {
         $this['config'] = new Config($configs);
-
         $this->registerProviders();
     }
 

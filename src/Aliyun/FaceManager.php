@@ -27,7 +27,7 @@ use Biaoqianwo\Face\Support\FileConverter;
  * @method array vehiclePlate($files, $options = []) 车牌识别
  * @method array general($files, $options = []) 通用文字识别
  */
-class OCRManager
+class FaceManager
 {
     /**
      * APPCode Instance

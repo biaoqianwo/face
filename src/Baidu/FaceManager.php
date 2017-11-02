@@ -1,14 +1,4 @@
 <?php
-
-/*
- * This file is part of the godruoyi/ocr.
- *
- * (c) godruoyi <godruoyi@gmail.com>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-
 namespace Biaoqianwo\Face\Baidu;
 
 use RuntimeException;
@@ -17,61 +7,43 @@ use Biaoqianwo\Face\Support\FileConverter;
 use Biaoqianwo\Face\Support\Http;
 
 /**
- * @author    godruoyi godruoyi@gmail.com>
- * @copyright 2017
- *
- * @see  http://ai.baidu.com/docs#/OCR-API/top
- * @see  https://github.com/godruoyi/ocr
- *
- * @method array idcard($images, $options = []) 身份证识别
+ * Class FaceManager
+ * 百度人脸识别地址：http://ai.baidu.com/docs#/Face-PHP-SDK/top
+ * @package Biaoqianwo\Face\Baidu
  */
-class OCRManager
+class FaceManager
 {
-    /**
-     * AccessToken Instance
-     *
-     * @var AccessToken
-     */
     protected $accessToken;
 
     /**
-     * OCR API Whether to support url
-     *
+     * API Whether to support url
      * @var boolean
      */
     protected $supportUrl = true;
 
-    const IDCARD = 'https://aip.baidubce.com/rest/2.0/ocr/v1/idcard';
+    const DETECT = 'https://aip.baidubce.com/rest/2.0/vis-faceattribute/v1/faceattribute';
+    const MATCH = 'https://aip.baidubce.com/rest/2.0/face/v2/match';
 
-    /**
-     * Register AccessToken
-     *
-     * @param AccessToken $accessToken
-     */
     public function __construct(AccessToken $accessToken)
     {
         $this->accessToken = $accessToken;
     }
 
     /**
-     * 身份证识别（不支持在线地址）
-     *
-     * @param  string|\SplFileInfo $images
-     * @param  array $options
-     *
-     *         参数                     是否可选     类型        可选范围/说明
-     *         detect_direction          N       boolean      true/false 是否检测图像朝向，默认不检测
-     *         id_card_side              Y       string       front、back，front：身份证正面；back：身份证背面
-     *         detect_risk               N       boolan       true/false 是否开启身份证风险类型功能，默认false
-     *
-     * @throws \RuntimeException
-     *
-     * @return array
+     * @param $image
+     * @param array $options
+     * ('max_face_num' => 1,
+     * 'face_fields' => 'expression')
+     * @return string
      */
-    public function idcard($images, array $options = [])
+    public function detect($image, array $options = [])
     {
-        $this->supportUrl = false;
-        return $this->request(self::IDCARD, $this->buildRequestParam($images, $options));
+        return $this->request(self::DETECT, $this->buildRequestParam($images, $options));
+    }
+
+    public function match($images, array $options = [])
+    {
+        return $this->request(self::MATCH, $this->buildRequestParam($images, $options));
     }
 
 
@@ -85,7 +57,6 @@ class OCRManager
     protected function request($url, array $options = [])
     {
         $httpClient = new Http;
-
         try {
             $response = $httpClient->request('POST', $url, [
                 'form_params' => $options,
@@ -99,7 +70,6 @@ class OCRManager
             }
         }
 
-
         return $httpClient->parseJson($response);
     }
 
@@ -111,7 +81,6 @@ class OCRManager
      */
     protected function buildRequestParam($images, $options = [])
     {
-        //Baidu OCR不支持多个url或图片，只支持一次识别一张
         if (is_array($images) && !empty($images[0])) {
             $images = $images[0];
         }

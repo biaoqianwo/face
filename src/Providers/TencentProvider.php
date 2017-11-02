@@ -3,7 +3,7 @@ namespace Biaoqianwo\Face\Providers;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Biaoqianwo\Face\Tencent\OCRManager;
+use Biaoqianwo\Face\Tencent\FaceManager;
 use Biaoqianwo\Face\Tencent\Authorization;
 
 class TencentProvider implements ServiceProviderInterface
@@ -23,7 +23,7 @@ class TencentProvider implements ServiceProviderInterface
         };
 
         $pimple['tencent'] = function ($app) {
-            return new OCRManager($app['tencent.auth']);
+            return new FaceManager($app['tencent.auth']);
         };
     }
 }

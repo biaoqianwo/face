@@ -1,7 +1,7 @@
 {
     "name": "biaoqianwo/face",
     "description": "The Best Image Ocr SDK For BAT.",
-    "keywords": ["face", "人脸比对", "百度FACE", "腾讯FACE", "阿里云FACE"],
+    "keywords": ["face", "人脸比对", "百度AI人脸识别", "腾讯人脸识别", "阿里云人脸识别"],
     "homepage": "http://github.com/biaoqianwo/face",
     "type": "library",
     "license": "MIT",
