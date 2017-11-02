@@ -7,48 +7,46 @@
 - [百度AI人脸识别](#baidu-face)
     - [人脸比对](#baidu-match)
 
-# Feature
+## Feature
 
- - 自定义缓存支持；
- - 符合 PSR 标准，可以很方便的与你的框架结合；
- - 命名不那么乱七八糟；
- - 支持目前市面多家服务商(BAT)
+ - 自定义缓存支持
+ - 符合 PSR 标准，可以很方便的与你的框架结合
+ - 支持服务商BAT
 
-# Support
+## Support
 
  - [百度AI人脸识别](http://ai.baidu.com/tech/face)
  - [阿里云人脸识别](https://data.aliyun.com/product/face)
  - [腾讯云万象优图](https://cloud.tencent.com/product/FaceRecognition)
 
-# Requirement
+## Requirement
 
  - PHP > 5.6
  - [composer](https://getcomposer.org/)
 
-# Installation
+## Installation
 
 ```bash
 composer require biaoqianwo/face
 ```
 
-# Usage
+## Usage
 
 基本使用（以百度人脸识别为例）
 
 ```php
-use Biaoqianwo\Face\Application;
+use Biaoqianwo\Face\Application as BiaoFace;
 
-$app = new Application([
+$app = new BiaoFace([
     'appKey' => 'appKey',
     'secretKey' => 'secretKey'
 ]);
-
 //人脸比对
 $result = $app->baidu->match($files);
 ```
 
 **返回结果**  
-请求两张图片
+百度AI人脸比对目前支持两张图片
 ```json
 {
     "log_id": 73473737,
@@ -63,9 +61,7 @@ $result = $app->baidu->match($files);
 }
 ```
 
-# 各平台支持的方法
-
-> 详情请参考官方文档
+## 各平台支持的方法
 
 所有平台支持的方法中，都满足以下结构：
 
@@ -84,13 +80,12 @@ $app->platform->$method($files, $options = [])
  > 注：`options` 的值都是可选的
 
 <a name="baidu-face"></a>
-## [百度AI人脸识别](http://ai.baidu.com/tech/face)
+### [百度AI人脸识别](http://ai.baidu.com/tech/face)
 
 目前采用 `AccessToken` 作为 `API` 认证方式，查看[鉴权认证机制](http://ai.baidu.com/docs#/Auth/top)
 
 <a name="baidu-match"></a>
 #### 人脸比对
-
 ```php
 $app->baidu->match($files, [
     'max_face_num' => 1,
@@ -99,37 +94,34 @@ $app->baidu->match($files, [
 ```
 
 <a name="aliyun-face"></a>
-## [阿里云人脸识别](https://data.aliyun.com/product/face)
+### [阿里云人脸识别](https://data.aliyun.com/product/face)
 
 目前采用 `APPCODE` 作为 `API` 认证方式，[查看我的APPCODE](https://market.console.aliyun.com/imageconsole/index.htm)
 
 ```php
-use Biaoqianwo\Face\Application;
+use Biaoqianwo\Face\Application as BiaoFace;
 
-$app = new Application([
+$app = new BiaoFace([
       'appcode' => '40bc103c7fe6417b87152f6f68bead2f',
     ]
 ]);
 ```
 
-> 阿里云人脸识别不支持在线图片地址
-
 <a name="aliyun-match"></a>
 #### 人脸比对
-
 ```php
 $app->aliyun->match($files);
 ```
 
 <a name="tencent-face"></a>
-## [腾讯云人脸识别](https://cloud.tencent.com/product/FaceRecognition)
+### [腾讯云人脸识别](https://cloud.tencent.com/product/FaceRecognition)
 
 > 可登录 [云API密钥控制台](https://console.cloud.tencent.com/capi)查看你的[个人 API 密钥](https://console.cloud.tencent.com/capi)
 
 ```php
-use Biaoqianwo\Face\Application;
+use Biaoqianwo\Face\Application as BiaoFace;
 
-$app = new Application([
+$app = new BiaoFace([
     'appId' => '1254032478',
     'secretId' => 'AKIDzODdB1nOELz0T8CEjTEkgKJOob3t2Tso',
     'secretKey' => '6aHHkz236LOYu0nRuBwn5PwT0x3km7EL',
@@ -137,13 +129,11 @@ $app = new Application([
 ]);
 ```
 
-> 腾讯云 人脸识别 暂不支持在线图片地址
-
 <a name="tencent-match"></a>
 #### 人脸比对
-
 ```php
 $app->tencent->match($files);
 ```
+
 ## LICENSE
 MIT
